@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="editor.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+     <script>tinymce.init({ selector:'textarea' });</script> 
+<body>
+    <style>
+        .container{
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    
+}
+
+.content{
+    display: flex;
+position: relative;
+    background-color: #fffdfd;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    z-index: 1 !important;
+}
+
+
+select{
+    font-size: medium;
+    /* width: 400px; */
+    padding: 5px;
+    border-color: black;
+}
+
+input{
+
+    font-size: medium;
+    width: 95%;
+    border-radius: 3px;
+    margin: 10px !important;
+    padding: 5px;
+    
+}
+
+.button{
+    background-color: rgb(55, 55, 75);
+    color: white;
+    padding: 2px !important;
+    border-radius: 5px;
+    border-style: none;
+    margin-bottom: 30px;
+    float: bottom;
+    font-size: medium;
+}
+
+
+.form{
+    margin: auto;
+    width: 600px;
+    
+}
+
+.content h2{
+    margin-right: 10px;
+}
+
+.textarea{
+    width: 650px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+   
+}
+
+#add_fields{
+    text-decoration: none;
+    padding: 5px;
+    background-color: white;
+    border-color: rgb(71, 71, 197);
+    color: rgb(71, 71, 197);
+    margin: 10px;
+    border-radius:5px;
+    
+}
+.close {
+    color: #5f5050;
+    float: right;
+    justify-items: right;
+     margin-top: -40px;
+    
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+    </style>
+ 
+<script defer src="index.js"></script>
+
+<div class="container">
+    <div class="content">
+        <form action="#" class="form" id="form">
+            <span class="close" id="closeid">&nbsp;&nbsp;&nbsp;&nbsp;&times;</span>
+            <input type="text" placeholder="Post title" required>
+            <textarea required>Next, use our Get Started docs to setup Tiny!</textarea>
+            <select name="People" id="people" required>
+                <option value="volvo">satayan chaudary</option>
+                <option value="saab">Dinesh aggrawal</option>
+                <option value="mercedes">Ashish mukherjee</option>
+                <option value="audi">simran sharma </option>
+              </select>
+            <button type="button" id="add_fields"  onclick="addfield()">+</button>
+            <button type="submit" class="button" id="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <!-- Vertical Navbar -->
+    <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical" style="max-width: 200px;">
+        <div class="container-fluid">
+            <!-- Toggler -->
+            <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Brand -->
+            <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
+                <img src="ADORE.png" alt="...">
+            </a>
+            <!-- User menu (mobile) -->
+            <div class="navbar-user d-lg-none">
+                <!-- Dropdown -->
+                <div class="dropdown">
+                    <!-- Toggle -->
+                    <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="avatar-parent-child">
+                            <img alt="Image Placeholder" src="https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar- rounded-circle">
+                            <span class="avatar-child avatar-badge bg-success"></span>
+                        </div>
+                    </a>
+                    <!-- Menu -->
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
+                        <a href="#" class="dropdown-item">Profile</a>
+                        <a href="#" class="dropdown-item">Settings</a>
+                        <a href="#" class="dropdown-item">Billing</a>
+                        <hr class="dropdown-divider">
+                        <a href="#" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidebarCollapse">
+                <!-- Navigation -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-house"></i> Home
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-people"></i> Users
+                        </a>
+                    </li>
+                </ul>
+                <!-- Divider -->
+                <hr class="navbar-divider my-5 opacity-20">
+                <!-- Navigation -->
+                
+                <!-- Push content down -->
+                <div class="mt-auto"></div>
+                <!-- User (md) -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-square"></i> Account
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-arrow-left"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Main content -->
+    <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-5 ">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight ">Blog Post Dashboard</h1>
+                        </div>
+                        <div id="editor" >
+                            <form action="" method="post">
+                                <!-- <textarea name="textarea" id="default" cols="30" rows="10"></textarea> -->
+                                <textarea>Next, use our Get Started docs to setup Tiny!</textarea>
+                                
+                               </form>
+                        </div>
+                        <!-- Actions -->
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <div class="mx-n1">
+                               
+                                <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-plus"></i>
+                                    </span>
+                                    <span id="entry">Entry</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nav -->
+                    
+                </div>
+            </div>
+        </header>
+        <!-- Main -->
+        
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0" style="box-shadow: none;">Applications</h5> 
+                        <!-- <div class="search ">
+                            
+                            <form action="#">
+                                <input type="text"
+                                placeholder="search"
+                                name="search">
+                                
+                            </form>
+                        
+                        </div>      -->
+                        </div>
+                        
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Blog Name</th>
+                                    <th scope="col">status</th>
+                                    <th scope="col">People</th>
+                                    <th scope="col">TimeStamp</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                            #1011
+                                        </a>
+                                    </td>
+                                    <td>
+                                        xyz
+                                    </td>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                            <!-- <span class="badge badge-lg badge-dot"><i class="bg-success"></i></span> -->
+                                           active
+                                        </a>
+                                    </td>
+                                    <td>
+                                        abc
+                                    </td>
+                                    <td>
+                                        <!-- <span class="badge badge-lg badge-dot"> -->
+                                            <i class="bg-success"></i>
+                                        </span>
+                                    </td>
+                                    
+                                    <td class="text-end">
+                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                       
+                                    </td>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <!-- <span class="badge badge-lg badge-dot"> -->
+                                            <i class="bg-warning"></i>
+                                        </span>
+                                    </td>
+
+                                    <td class="text-end">
+                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <!-- <span class="badge badge-lg badge-dot"> -->
+                                            <i class="bg-success"></i>
+                                        </span>
+                                    </td>
+                                    
+                                    <td class="text-end">
+                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                       
+                                    </td>
+                                    <td>
+                                        <!-- <span class="badge badge-lg badge-dot"> -->
+                                            <i class="bg-dark"></i>
+                                        </span>
+                                    </td>
+                                    
+                                    <td class="text-end">
+                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <!-- <span class="badge badge-lg badge-dot"> -->
+                                            <i class="bg-danger"></i>
+                                        </span>
+                                    </td>
+                                    
+                                    <td class="text-end">
+                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                        
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                           
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <!-- <span class="badge badge-lg badge-dot"> -->
+                                            <i class="bg-success"></i>
+                                        </span>
+                                    </td>
+                                    
+                                    <td class="text-end">
+                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                        
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                           
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <!-- <span class="badge badge-lg badge-dot"> -->
+                                            <i class="bg-success"></i>
+                                        </span>
+                                    </td>
+                                    
+                                    <td class="text-end">
+                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                        
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                            
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                       
+                                        <a class="text-heading font-semibold" href="#">
+                                           
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        <!-- <span class="badge badge-lg badge-dot"> -->
+                                            <i class="bg-success"></i>
+                                        </span>
+                                    </td>
+                                    
+                                    <td class="text-end">
+                                        <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                            <span class=" pe-2">
+                                                <i class="bi bi-pencil"></i>
+                                            </span>
+                                            <span>Edit</span>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                        
+                                    </td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm">Showing 0 items out of 0 results found</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+    </div>
+</div>
+
+
+</body>
+</html>
+
